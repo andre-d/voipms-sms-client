@@ -292,8 +292,10 @@ public class ConversationsRecyclerViewAdapter
             Matcher numconstraint = numFilterPattern.matcher(filterConstraint);
             String numfilter = numconstraint.replaceAll("");
 
-            Conversation[] conversations = Database.getInstance(applicationContext).getConversations(
-                    preferences.getDid());
+            Conversation[] conversations = Database.getInstance(applicationContext).getLimitedFilteredConversations(
+                    preferences.getDid(),
+                    filterConstraint
+            );
             for (Conversation conversation : conversations) {
                 String contactName = Utils.getContactName(applicationContext, conversation.getContact());
 
